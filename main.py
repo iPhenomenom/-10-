@@ -1,8 +1,9 @@
+import re
 import calendar
 from datetime import date, datetime, timedelta
 
 users = [{"name": "Tanya", "birthday": datetime(1960, 3, 4)},
-         {"name": "Sonya", "birthday": datetime(2015, 2, 25)},
+         {"name": "Sonya", "birthday": datetime(2016, 2, 25)},
          {"name": "Bill", "birthday": datetime(1965, 2, 23)},
          {"name": "Jill", "birthday": datetime(1988, 2, 23)},
          {"name": "Kim", "birthday": datetime(1965, 2, 22)},
@@ -11,6 +12,8 @@ users = [{"name": "Tanya", "birthday": datetime(1960, 3, 4)},
 
 def get_birthdays_per_week(users):
     now = datetime.now()
+
+    
 
     monday = []
     tuesday = []
@@ -25,19 +28,19 @@ def get_birthdays_per_week(users):
 
 
     for user in users:
+        
+        user_year = user['birthday'].replace(year=now.year)
 
-        user_year = user['birthday'].year + (now.year - user['birthday'].year)
-
-        if now.year <= user_year <= next_week.year:
-
+        if now.year <= user_year.year <= next_week.year:
+            
             if now.month <= user['birthday'].month <= next_week.month:
 
                 if  now.day <= user['birthday'].day <= next_week.day:
 
-                    if user['birthday'].weekday()  == 0:
+                    if user['birthday'].weekday() == 0:
                         monday.append(user['name'])
 
-                    elif user['birthday'].weekday()== 1:
+                    elif user['birthday'].weekday() == 1:
                         tuesday.append(user['name'])
 
                     elif user['birthday'].weekday() == 2:
