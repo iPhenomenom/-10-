@@ -2,7 +2,7 @@ import calendar
 from datetime import date, datetime, timedelta
 
 users = [{"name": "Tanya", "birthday": datetime(1960, 3, 4)},
-         {"name": "Sonya", "birthday": datetime(2015, 2, 19)},
+         {"name": "Sonya", "birthday": datetime(2015, 2, 25)},
          {"name": "Bill", "birthday": datetime(1965, 2, 23)},
          {"name": "Jill", "birthday": datetime(1988, 2, 23)},
          {"name": "Kim", "birthday": datetime(1965, 2, 22)},
@@ -22,32 +22,38 @@ def get_birthdays_per_week(users):
 
     next_week = datetime.now() + timedelta(days=7)
 
+
+
     for user in users:
 
-        if now.month <= user['birthday'].month <= next_week.month:
+        user_year = user['birthday'].year + (now.year - user['birthday'].year)
 
-            if  now.day <= user['birthday'].day <= next_week.day:
+        if now.year <= user_year <= next_week.year:
 
-                if user['birthday'].weekday() == 0:
-                    monday.append(user['name'])
+            if now.month <= user['birthday'].month <= next_week.month:
 
-                elif user['birthday'].weekday() == 1:
-                    tuesday.append(user['name'])
+                if  now.day <= user['birthday'].day <= next_week.day:
 
-                elif user['birthday'].weekday() == 2:
-                    wednesday.append(user['name'])
+                    if user['birthday'].weekday()  == 0:
+                        monday.append(user['name'])
 
-                elif user['birthday'].weekday() == 3:
-                    thursday.append(user['name'])
+                    elif user['birthday'].weekday()== 1:
+                        tuesday.append(user['name'])
 
-                elif user['birthday'].weekday() == 4:
-                    friday .append(user['name'])
+                    elif user['birthday'].weekday() == 2:
+                        wednesday.append(user['name'])
 
-                elif user['birthday'].weekday() == 5:
-                    monday.append(user['name'])
+                    elif user['birthday'].weekday() == 3:
+                        thursday.append(user['name'])
 
-                elif user['birthday'].weekday() == 6:
-                    monday.append(user['name'])
+                    elif user['birthday'].weekday() == 4:
+                        friday .append(user['name'])
+
+                    elif user['birthday'].weekday() == 5:
+                        monday.append(user['name'])
+
+                    elif user['birthday'].weekday() == 6:
+                        monday.append(user['name'])
 
     if len(monday) != 0:
         print(f"Monday:", ', '.join(monday))
